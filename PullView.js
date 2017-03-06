@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -51,21 +51,18 @@ export default class extends Pullable {
 
     constructor(props) {
         super(props);
-        this.scrollTo = this.scrollTo.bind(this);
-        this.scrollToEnd = this.scrollToEnd.bind(this);
-    }
-
-    scrollTo(...args) {
-        this.scroll.scrollTo(...args);
-    }
-
-    scrollToEnd(args) {
-        this.scroll.scrollTo(args);
     }
 
     getScrollable(refreshControl) {
         return (
-            <ScrollView ref={(c) => {this.scroll = c;}} refreshControl={refreshControl} scrollEnabled={this.state.scrollEnabled} onScroll={this.onScroll}>
+            <ScrollView
+              ref={(c) => {this.scroll = c;}}
+              refreshControl={refreshControl}
+              scrollEnabled={this.state.scrollEnabled}
+              onScroll={this.onScroll}
+              onScrollEndDrag={(e) => this.props.onScrollEndDrag && this.props.onScrollEndDrag(e)}
+              onMomentumScrollEnd={(e) => this.props.onMomentumScrollEnd && this.props.onMomentumScrollEnd(e)}
+            >
                 {this.props.children}
             </ScrollView>
         );
